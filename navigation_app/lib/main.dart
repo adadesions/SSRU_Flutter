@@ -21,6 +21,7 @@ final GoRouter _router = GoRouter(
             path: 'editProfile/:username',
             builder: (context, state) => EditProfilePage(
               username: state.pathParameters['username'] ?? "noname",
+              saveMethod: state.queryParameters['saveMethod'] ?? "local"
             ),
           ),
         ]),

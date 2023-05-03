@@ -2,8 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 class EditProfilePage extends StatefulWidget {
-  const EditProfilePage({super.key, required this.username});
+  const EditProfilePage({
+    super.key,
+    required this.username,
+    required this.saveMethod,
+  });
   final String username;
+  final String saveMethod;
 
   @override
   State<StatefulWidget> createState() => _EditProfileState();
