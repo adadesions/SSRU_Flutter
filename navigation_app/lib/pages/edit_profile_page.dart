@@ -15,6 +15,7 @@ class EditProfilePage extends StatefulWidget {
 }
 
 class _EditProfileState extends State<EditProfilePage> {
+  String _username = "";
   final TextStyle bodyStyle = const TextStyle(
     fontSize: 20,
   );
@@ -30,9 +31,18 @@ class _EditProfileState extends State<EditProfilePage> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               Text(
-                'Edit Username: ${widget.username}',
+                'Edit Username',
                 style: bodyStyle,
               ),
+              TextField(
+                decoration: InputDecoration(
+                  label: Text(widget.username),
+                ),
+                onChanged: (text) => setState(() {
+                  _username = text;
+                }),
+              ),
+              Text('keylogger: $_username'),
               Text(
                 'Save Method: ${widget.saveMethod}',
                 style: bodyStyle,
