@@ -11,17 +11,19 @@ final GoRouter _router = GoRouter(
   routes: <RouteBase>[
     GoRoute(
         path: '/',
-        builder: (context, state) => const HomePage(title: "Home"),
+        builder: (context, state) => const HomePage(title: 'Home'),
         routes: <RouteBase>[
           GoRoute(
-            path: 'profile',
-            builder: (context, state) => const ProfilePage(),
+            path: 'profile/:username',
+            builder: (context, state) => ProfilePage(
+              username: state.pathParameters['username'] ?? 'noname'
+            ),
           ),
           GoRoute(
             path: 'editProfile/:username',
             builder: (context, state) => EditProfilePage(
-              username: state.pathParameters['username'] ?? "noname",
-              saveMethod: state.queryParameters['saveMethod'] ?? "local"
+              username: state.pathParameters['username'] ?? 'noname',
+              saveMethod: state.queryParameters['saveMethod'] ?? 'local'
             ),
           ),
         ]),

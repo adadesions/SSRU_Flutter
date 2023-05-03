@@ -48,7 +48,7 @@ class _EditProfileState extends State<EditProfilePage> {
                 style: bodyStyle,
               ),
               TextButton(
-                  onPressed: () => context.go('/profile'),
+                  onPressed: () => context.go('/profile/$_username'),
                   child: const Text("Submit")),
             ],
           ),

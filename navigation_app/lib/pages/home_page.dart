@@ -36,7 +36,7 @@ class _HomePageState extends State<HomePage> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () => context.go('/profile'),
+        onPressed: () => context.go('/profile/peter_parker'),
         tooltip: 'Increment',
         child: const Icon(Icons.settings),
       ), // This trailing comma makes auto-formatting nicer for build methods.
@@ -44,7 +44,9 @@ class _HomePageState extends State<HomePage> {
   }
 
   void _navigateToProfilePage() {
-    Navigator.of(context)
-        .push(MaterialPageRoute(builder: (context) => const ProfilePage()));
+    Navigator.of(context).push(MaterialPageRoute(
+        builder: (context) => const ProfilePage(
+              username: 'Peter_Parker',
+            )));
   }
 }

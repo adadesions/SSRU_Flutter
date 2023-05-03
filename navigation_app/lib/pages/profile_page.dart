@@ -2,15 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 class ProfilePage extends StatefulWidget {
-  const ProfilePage({super.key});
+  const ProfilePage({super.key, required this.username});
+  final String username;
 
   @override
   State<StatefulWidget> createState() => _ProfileStates();
 }
 
 class _ProfileStates extends State<ProfilePage> {
-  final String _username = "Peter_Parker999";
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -21,7 +20,8 @@ class _ProfileStates extends State<ProfilePage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Text("Username: $_username", style: const TextStyle(fontSize: 24)),
+            Text("Username: ${widget.username}",
+                style: const TextStyle(fontSize: 24)),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
@@ -29,8 +29,8 @@ class _ProfileStates extends State<ProfilePage> {
                     onPressed: () => context.go('/'),
                     child: const Text("Home")),
                 TextButton(
-                    onPressed: () =>
-                        context.go('/editProfile/$_username?saveMethod=cloud'),
+                    onPressed: () => context
+                        .go('/editProfile/${widget.username}?saveMethod=cloud'),
                     child: const Text("Edit")),
               ],
             ),
