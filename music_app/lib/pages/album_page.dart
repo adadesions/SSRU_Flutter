@@ -4,7 +4,12 @@ import 'package:flutter/material.dart';
 import '../models/album.dart';
 
 final List<Album> albumList = [
-  Album("Jaff Satur", "Jaff Satur", 12, "assets/images/albums/jeff_cover.jpg"),
+  Album(
+      title: "Jaff Satur",
+      artist: "Jaff Satur",
+      description: "Artist under Wayfer Records, Warner Music Thailand.",
+      numSongs: 12,
+      imgUrl: "assets/images/albums/jeff_cover.jpg"),
 ];
 
 class AlbumPage extends StatefulWidget {
@@ -19,7 +24,7 @@ class _AlbumPageState extends State<AlbumPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Albums"),
+        title: const Text("Albums"),
       ),
       body: ListView.builder(
         itemCount: albumList.length,
@@ -27,7 +32,9 @@ class _AlbumPageState extends State<AlbumPage> {
           return ListTile(
             leading: Image.asset(albumList[index].imgUrl),
             title: Text(albumList[index].title),
-            subtitle: Text(albumList[index].artist),
+            subtitle: Text(albumList[index].description),
+            trailing: Text('${albumList[index].numSongs.toString()} Songs'),
+            isThreeLine: true,
           );
         },
       ),
