@@ -21,7 +21,7 @@ class _ProfileStates extends State<ProfilePage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Text("Username: $_username"),
+            Text("Username: $_username", style: const TextStyle(fontSize: 24)),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
@@ -29,7 +29,8 @@ class _ProfileStates extends State<ProfilePage> {
                     onPressed: () => context.go('/'),
                     child: const Text("Home")),
                 TextButton(
-                    onPressed: () => context.go('/editProfile/$_username'),
+                    onPressed: () =>
+                        context.go('/editProfile/$_username?saveMethod=cloud'),
                     child: const Text("Edit")),
               ],
             ),

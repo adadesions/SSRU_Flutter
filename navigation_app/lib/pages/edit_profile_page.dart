@@ -15,6 +15,10 @@ class EditProfilePage extends StatefulWidget {
 }
 
 class _EditProfileState extends State<EditProfilePage> {
+  final TextStyle bodyStyle = const TextStyle(
+    fontSize: 20,
+  );
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -23,9 +27,16 @@ class _EditProfileState extends State<EditProfilePage> {
         child: Padding(
           padding: const EdgeInsets.all(30),
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              Text('Edit Username: ${widget.username}'),
+              Text(
+                'Edit Username: ${widget.username}',
+                style: bodyStyle,
+              ),
+              Text(
+                'Save Method: ${widget.saveMethod}',
+                style: bodyStyle,
+              ),
               TextButton(
                   onPressed: () => context.go('/profile'),
                   child: const Text("Submit")),
