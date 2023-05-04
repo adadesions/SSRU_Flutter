@@ -68,7 +68,7 @@ class _AlbumPageState extends State<AlbumPage> {
           items: const [
             BottomNavigationBarItem(
               icon: Icon(Icons.home),
-              label: 'Home',
+              label: 'Home001',
             ),
             BottomNavigationBarItem(
               icon: Icon(Icons.search),
