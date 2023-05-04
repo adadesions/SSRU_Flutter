@@ -16,11 +16,14 @@ class Tasks extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
+      scrollDirection: Axis.vertical,
+      shrinkWrap: true,
       itemCount: taskList.length,
       itemBuilder: (context, index) => Ink(
         // color: Colors.lightBlue,
         child: ListTile(
           leading: Checkbox(
+            shape: const CircleBorder(),
             checkColor: Colors.white,
             value: taskList[index].status == Status.done,
             onChanged: (bool? value) {
@@ -30,7 +33,8 @@ class Tasks extends StatelessWidget {
             },
           ),
           title: Text(taskList[index].body),
-          subtitle: Text(taskList[index].status.toString()),
+          subtitle: Text(taskList[index].deadline),
+          trailing: taskList[index].getIconStatus(),
           onTap: () {},
         ),
       ),

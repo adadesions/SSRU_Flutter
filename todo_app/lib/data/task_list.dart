@@ -22,13 +22,13 @@ List<Task> taskList = [
   Task(
       id: 3,
       body: 'Testing app on multiple devices',
-      status: Status.process,
+      status: Status.none,
       deadline: "07/07/2023",
       flag: Flags.work),
   Task(
       id: 4,
       body: 'Preparing for presentation',
-      status: Status.process,
+      status: Status.archive,
       deadline: "07/15/2023",
       flag: Flags.work)
 ];
