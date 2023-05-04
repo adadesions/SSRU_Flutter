@@ -19,6 +19,7 @@ class TodoPage extends StatefulWidget {
 class _TodoPageState extends State<TodoPage> {
   final List<Task> _taskList = taskList;
   Map<Flags, int> _totalTasks = {};
+  Flags _selectedFlag = Flags.all;
 
   void calTotalTasks() {
     Map<Flags, int> result = {};
@@ -52,24 +53,24 @@ class _TodoPageState extends State<TodoPage> {
             child: ListView.builder(
               shrinkWrap: true, // all devices, use MediaQuery
               scrollDirection: Axis.horizontal,
-              itemCount: _totalTasks.length,
+              itemCount: flagNames.length,
               itemBuilder: (context, index) => Container(
                 height: 100,
                 width: 250,
                 padding: const EdgeInsets.all(10),
-                color: Colors.red,
+                color: Colors.lightBlueAccent,
                 margin: const EdgeInsets.fromLTRB(30, 0, 0, 0),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
                     Text(
-                      "${_totalTasks[Flags.values[index]]} tasks",
-                      style: TextStyle(fontSize: 16, letterSpacing: 5),
+                      '${_displayTaskNumbers(Flags.values[index])} tasks',
+                      style: const TextStyle(fontSize: 16, letterSpacing: 5),
                     ),
                     Text(
                       '${flagNames[Flags.values[index]]}',
-                      style: TextStyle(fontSize: 26, letterSpacing: 5),
+                      style: const TextStyle(fontSize: 26, letterSpacing: 5),
                     ),
                   ],
                 ),
@@ -77,7 +78,8 @@ class _TodoPageState extends State<TodoPage> {
             ),
           ),
           Tasks(
-            taskList: taskList,
+            taskList: _taskList,
+            selectedFlag: _selectedFlag,
             onChangeCheckbox: _onChangeCheckbox,
           ),
         ],
@@ -104,5 +106,10 @@ class _TodoPageState extends State<TodoPage> {
           ? _taskList[index].status = Status.process
           : _taskList[index].status = Status.done;
     });
+  }
+
+  String _displayTaskNumbers(Flags value) {
+    if (value == Flags.all) return _taskList.length.toString();
+    return _totalTasks[value] != null ? _totalTasks[value].toString() : '0';
   }
 }
