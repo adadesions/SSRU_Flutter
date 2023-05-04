@@ -43,3 +43,11 @@ class Task {
 enum Status { done, process, archive, none }
 
 enum Flags { personal, work, school, social, none }
+
+Map<Flags, String> flagNames = {
+  Flags.personal: 'Personal',
+  Flags.work: 'Work',
+  Flags.school: 'School',
+  Flags.social: 'Social',
+  Flags.none: "None"
+};

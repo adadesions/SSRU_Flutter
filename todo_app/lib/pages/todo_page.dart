@@ -52,7 +52,7 @@ class _TodoPageState extends State<TodoPage> {
             child: ListView.builder(
               shrinkWrap: true, // all devices, use MediaQuery
               scrollDirection: Axis.horizontal,
-              itemCount: 10,
+              itemCount: _totalTasks.length,
               itemBuilder: (context, index) => Container(
                 height: 100,
                 width: 250,
@@ -64,11 +64,11 @@ class _TodoPageState extends State<TodoPage> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
                     Text(
-                      "${_totalTasks[Flags.personal]} tasks",
+                      "${_totalTasks[Flags.values[index]]} tasks",
                       style: TextStyle(fontSize: 16, letterSpacing: 5),
                     ),
                     Text(
-                      "Personal",
+                      '${flagNames[Flags.values[index]]}',
                       style: TextStyle(fontSize: 26, letterSpacing: 5),
                     ),
                   ],

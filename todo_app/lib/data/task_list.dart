@@ -12,7 +12,7 @@ List<Task> taskList = [
       body: 'Implementing user authentication',
       status: Status.done,
       deadline: "05/31/2023",
-      flag: Flags.work),
+      flag: Flags.none),
   Task(
       id: 2,
       body: 'Creating a responsive UI design',
@@ -30,5 +30,5 @@ List<Task> taskList = [
       body: 'Preparing for presentation',
       status: Status.archive,
       deadline: "07/15/2023",
-      flag: Flags.work)
+      flag: Flags.school)
 ];
