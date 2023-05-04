@@ -56,6 +56,34 @@ class _AlbumPageState extends State<AlbumPage> {
             );
           },
         ),
+        bottomNavigationBar: BottomNavigationBar(
+          type: BottomNavigationBarType.fixed,
+          currentIndex: 2,
+          showSelectedLabels: false,
+          showUnselectedLabels: false,
+          elevation: 0,
+          unselectedItemColor: const Color.fromARGB(255, 0, 0, 0),
+          selectedItemColor: const Color.fromARGB(255, 255, 89, 0),
+          backgroundColor: const Color.fromARGB(50, 255, 89, 0),
+          items: const [
+            BottomNavigationBarItem(
+              icon: Icon(Icons.home),
+              label: 'Home',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.search),
+              label: 'Search',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.library_music),
+              label: 'Library',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.settings),
+              label: 'Settings',
+            ),
+          ],
+        ),
       ),
     );
   }
