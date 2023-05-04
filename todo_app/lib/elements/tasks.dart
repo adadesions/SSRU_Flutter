@@ -22,22 +22,25 @@ class Tasks extends StatelessWidget {
       itemCount: taskList.length,
       itemBuilder: (context, index) => Ink(
         // color: Colors.lightBlue,
-        child: ListTile(
-          leading: Checkbox(
-            shape: const CircleBorder(),
-            checkColor: Colors.white,
-            value: taskList[index].status == Status.done,
-            onChanged: (bool? value) {
-              if (onChangeCheckbox != null) {
-                onChangeCheckbox!(index);
-              }
-            },
-          ),
-          title: Text(taskList[index].body),
-          subtitle: Text(taskList[index].deadline),
-          trailing: taskList[index].getIconStatus(),
-          onTap: () {},
-        ),
+        child: (taskList[index].flag == selectedFlag) ||
+                (selectedFlag == Flags.all)
+            ? ListTile(
+                leading: Checkbox(
+                  shape: const CircleBorder(),
+                  checkColor: Colors.white,
+                  value: taskList[index].status == Status.done,
+                  onChanged: (bool? value) {
+                    if (onChangeCheckbox != null) {
+                      onChangeCheckbox!(index);
+                    }
+                  },
+                ),
+                title: Text(taskList[index].body),
+                subtitle: Text(taskList[index].deadline),
+                trailing: taskList[index].getIconStatus(),
+                onTap: () {},
+              )
+            : null,
       ),
     );
   }

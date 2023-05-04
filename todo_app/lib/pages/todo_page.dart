@@ -54,25 +54,28 @@ class _TodoPageState extends State<TodoPage> {
               shrinkWrap: true, // all devices, use MediaQuery
               scrollDirection: Axis.horizontal,
               itemCount: flagNames.length,
-              itemBuilder: (context, index) => Container(
-                height: 100,
-                width: 250,
-                padding: const EdgeInsets.all(10),
-                color: Colors.lightBlueAccent,
-                margin: const EdgeInsets.fromLTRB(30, 0, 0, 0),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    Text(
-                      '${_displayTaskNumbers(Flags.values[index])} tasks',
-                      style: const TextStyle(fontSize: 16, letterSpacing: 5),
-                    ),
-                    Text(
-                      '${flagNames[Flags.values[index]]}',
-                      style: const TextStyle(fontSize: 26, letterSpacing: 5),
-                    ),
-                  ],
+              itemBuilder: (context, index) => InkWell(
+                onTap: () => _onSelectFlag(Flags.values[index]),
+                child: Container(
+                  height: 100,
+                  width: 250,
+                  padding: const EdgeInsets.all(10),
+                  color: Colors.lightBlueAccent,
+                  margin: const EdgeInsets.fromLTRB(30, 0, 0, 0),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Text(
+                        '${_displayTaskNumbers(Flags.values[index])} tasks',
+                        style: const TextStyle(fontSize: 16, letterSpacing: 5),
+                      ),
+                      Text(
+                        '${flagNames[Flags.values[index]]}',
+                        style: const TextStyle(fontSize: 26, letterSpacing: 5),
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),
@@ -111,5 +114,11 @@ class _TodoPageState extends State<TodoPage> {
   String _displayTaskNumbers(Flags value) {
     if (value == Flags.all) return _taskList.length.toString();
     return _totalTasks[value] != null ? _totalTasks[value].toString() : '0';
+  }
+
+  void _onSelectFlag(Flags value) {
+    setState(() {
+      _selectedFlag = value;
+    });
   }
 }
