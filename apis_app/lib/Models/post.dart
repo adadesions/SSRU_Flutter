@@ -1,3 +1,7 @@
+import 'dart:async';
+import 'dart:convert';
+import 'package:http/http.dart' as http;
+
 class Post {
   final int userId;
   final int id;
@@ -27,5 +31,18 @@ class Post {
       'title': title,
       'completed': completed,
     };
+  }
+}
+
+Future<List<Post>?> fetchPosts() async {
+  Uri endpoint = Uri.parse('https://jsonplaceholder.typicode.com/todos');
+  final response = await http.get(endpoint);
+
+  if (response.statusCode == 200) {
+    List jsonResponse = json.decode(response.body);
+    return jsonResponse.map((data) => Post.fromJson(data)).toList();
+  } else {
+    throw Exception(
+        "Error: status code not 200, Status code: ${response.statusCode}");
   }
 }

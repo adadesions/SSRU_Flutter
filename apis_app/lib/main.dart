@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 
 // Models
-import 'Models/album.dart';
+import 'models/album.dart';
+
+// pages
+import 'pages/newsfeed.dart';
 
 void main() {
   runApp(const ApiApp());
@@ -26,29 +29,29 @@ class _ApiAppState extends State<ApiApp> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      theme: ThemeData.light(),
-      home: Scaffold(
-        appBar: AppBar(title: const Text('Api app')),
-        body: FutureBuilder<List<Album>?>(
-          future: _futureAlbums,
-          builder: (context, snapshot) {
-            if (snapshot.hasData) {
-              return ListView.builder(
-                  itemCount: snapshot.data!.length,
-                  itemBuilder: (context, idx) => ListTile(
-                        title: Text(snapshot.data![idx].title),
-                        subtitle: Text(snapshot.data![idx].userId.toString()),
-                        trailing: Text(snapshot.data![idx].id.toString()),
-                      ));
-            } else if (snapshot.hasError) {
-              return Text('$snapshot.error');
-            }
-
-            return const CircularProgressIndicator();
-          },
-        ),
-      ),
-    );
+    return MaterialApp(theme: ThemeData.light(), home: const Newsfeed());
   }
 }
+
+
+// Scaffold(
+//         appBar: AppBar(title: const Text('Api app')),
+//         body: FutureBuilder<List<Album>?>(
+//           future: _futureAlbums,
+//           builder: (context, snapshot) {
+//             if (snapshot.hasData) {
+//               return ListView.builder(
+//                   itemCount: snapshot.data!.length,
+//                   itemBuilder: (context, idx) => ListTile(
+//                         title: Text(snapshot.data![idx].title),
+//                         subtitle: Text(snapshot.data![idx].userId.toString()),
+//                         trailing: Text(snapshot.data![idx].id.toString()),
+//                       ));
+//             } else if (snapshot.hasError) {
+//               return Text('$snapshot.error');
+//             }
+
+//             return const CircularProgressIndicator();
+//           },
+//         ),
+//       ),
