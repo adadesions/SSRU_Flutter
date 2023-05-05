@@ -27,3 +27,17 @@ Future<List<Album>?> fetchAlbums() async {
         "Error: status code not 200, Status code: ${response.statusCode}");
   }
 }
+
+// Fetching for development purpose
+Future<void> fetchData() async {
+  Uri endpoint = Uri.parse('https://dog.ceo/api/breeds/image/random');
+  final res = await http.get(endpoint);
+
+  if (res.statusCode == 200) {
+    final Map<String, dynamic> jsonRes = jsonDecode(res.body);
+    print(jsonRes);
+  } else {
+    throw Exception(
+        "Error: status code not 200, Status code: ${res.statusCode}");
+  }
+}

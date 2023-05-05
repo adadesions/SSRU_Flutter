@@ -21,6 +21,7 @@ class _ApiAppState extends State<ApiApp> {
   void initState() {
     super.initState();
     _futureAlbums = fetchAlbums();
+    fetchData();
   }
 
   @override
