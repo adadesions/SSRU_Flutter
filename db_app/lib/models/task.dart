@@ -6,17 +6,18 @@ import 'package:flutter/services.dart';
 import 'package:path_provider/path_provider.dart';
 
 class Task {
+  int id;
   String task;
   String dueDate;
 
-  Task({required this.task, required this.dueDate});
+  Task({required this.id, required this.task, required this.dueDate});
 
   factory Task.fromJson(Map<String, dynamic> json) {
-    return Task(task: json['task'], dueDate: json['dueDate']);
+    return Task(id: json['id'], task: json['task'], dueDate: json['dueDate']);
   }
 
   Map<String, dynamic> toJson() {
-    return {'task': task, 'dueDate': dueDate};
+    return {'id': id, 'task': task, 'dueDate': dueDate};
   }
 
   static Future<List<Task>> readFile(String filePath) async {

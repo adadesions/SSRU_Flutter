@@ -22,6 +22,8 @@ class _HomePageState extends State<HomePage> {
 
   List<Task> _taskDB = [];
 
+  int _latestId = 0;
+
   @override
   void initState() {
     super.initState();
@@ -34,6 +36,7 @@ class _HomePageState extends State<HomePage> {
     final data = await SqliteService.getTasks();
     setState(() {
       _taskDB = data;
+      _latestId = _task.length + 1;
     });
   }
 
@@ -72,9 +75,9 @@ class _HomePageState extends State<HomePage> {
                       _formKeys.currentState!.save();
                       setState(() {
                         // Add task to database
-                        SqliteService.createTask(
-                            Task(task: _task, dueDate: _dueDate));
-                        
+                        SqliteService.createTask(Task(
+                            id: _latestId, task: _task, dueDate: _dueDate));
+
                         // Force update UIs
                         _updatedTaskList();
                       });
@@ -90,6 +93,13 @@ class _HomePageState extends State<HomePage> {
                   return ListTile(
                     title: Text(_taskDB[index].task),
                     subtitle: Text(_taskDB[index].dueDate),
+                    trailing: TextButton(
+                      child: const Icon(Icons.remove),
+                      onPressed: () {
+                        SqliteService.deleteTask(_taskDB[index].id);
+                        _updatedTaskList();
+                      },
+                    ),
                   );
                 },
               ),
