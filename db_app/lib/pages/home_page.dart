@@ -13,11 +13,11 @@ class _HomePageState extends State<HomePage> {
   String _task = '';
 
   String _dueDate = '';
-  
+
   late Future<List<Task>> _futureTasks;
 
   @override
-  void initState() {    
+  void initState() {
     super.initState();
   }
 
@@ -65,12 +65,14 @@ class _HomePageState extends State<HomePage> {
                 builder: (context, snapshot) {
                   return ListView.builder(
                     itemCount: snapshot.data!.length,
-                    itemBuilder:(context, index) {
-                      return snapshot.hasData ? ListTile(
-                        title: snapshot.data![index].task,
-                      ) : const CircularProgressIndicator();
+                    itemBuilder: (context, index) {
+                      return snapshot.hasData
+                          ? ListTile(
+                              title: snapshot.data![index].task,
+                            )
+                          : const CircularProgressIndicator();
                     },
-                  )
+                  );
                 },
               ),
             ),
