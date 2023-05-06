@@ -13,6 +13,13 @@ class _HomePageState extends State<HomePage> {
   String _task = '';
 
   String _dueDate = '';
+  
+  late Future<List<Task>> _futureTasks;
+
+  @override
+  void initState() {    
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -31,13 +38,40 @@ class _HomePageState extends State<HomePage> {
                   TextFormField(
                     decoration:
                         const InputDecoration(labelText: 'Thing to do...'),
-                    onSaved: (newValue) => {_task = newValue ?? ''},
+                    onSaved: (newValue) {
+                      _task = newValue ?? '';
+                      print('task saved: $_task');
+                    },
                   ),
                   TextFormField(
                     decoration: const InputDecoration(labelText: 'due'),
-                    onSaved: (newValue) => {_dueDate = newValue ?? ''},
+                    onSaved: (newValue) {
+                      _dueDate = newValue ?? '';
+                      print('due saved: $_dueDate');
+                    },
+                  ),
+                  ElevatedButton(
+                    child: const Text('Save'),
+                    onPressed: () {
+                      _formKeys.currentState!.save();
+                    },
                   ),
                 ],
+              ),
+            ),
+            Expanded(
+              child: FutureBuilder<List<Task>>(
+                future: _futureTasks,
+                builder: (context, snapshot) {
+                  return ListView.builder(
+                    itemCount: snapshot.data!.length,
+                    itemBuilder:(context, index) {
+                      return snapshot.hasData ? ListTile(
+                        title: snapshot.data![index].task,
+                      ) : const CircularProgressIndicator();
+                    },
+                  )
+                },
               ),
             ),
           ],
