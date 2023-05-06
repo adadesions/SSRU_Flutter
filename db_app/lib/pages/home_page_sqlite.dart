@@ -20,8 +20,6 @@ class _HomePageState extends State<HomePage> {
 
   String _dueDate = '';
 
-  late Future<List<Task>> _futureTasks;
-
   List<Task> _taskDB = [];
 
   @override
@@ -73,8 +71,11 @@ class _HomePageState extends State<HomePage> {
                     onPressed: () {
                       _formKeys.currentState!.save();
                       setState(() {
+                        // Add task to database
                         SqliteService.createTask(
                             Task(task: _task, dueDate: _dueDate));
+                        
+                        // Force update UIs
                         _updatedTaskList();
                       });
                     },

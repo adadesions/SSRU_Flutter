@@ -28,4 +28,21 @@ class SqliteService {
     final List<Map<String, dynamic>> queryResult = await db.query('Todos');
     return queryResult.map((q) => Task.fromJson(q)).toList();
   }
+
+  // Update
+  static Future<void> updateTask(int id, Task newTask) async {
+    final Database db = await initializeDB();
+    await db.update(
+      'Todos',
+      newTask.toJson(),
+      where: 'id = ?',
+      whereArgs: [id],
+    );
+  }
+
+  // Delete
+  static Future<void> deleteTask(int id) async {
+    final Database db = await initializeDB();
+    await db.delete('Todos', where: "id = ?", whereArgs: [id]);
+  }
 }
