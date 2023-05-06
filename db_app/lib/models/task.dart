@@ -3,6 +3,7 @@ import 'dart:io';
 import 'dart:convert';
 
 import 'package:flutter/services.dart';
+import 'package:path_provider/path_provider.dart';
 
 class Task {
   String task;
@@ -25,13 +26,27 @@ class Task {
     return jsonList.map((data) => Task.fromJson(data)).toList();
   }
 
-  static void writeFile(List<Task> taskList, String filePath) async {
+  static void writeFile(
+      List<Task> taskList, String filePath, bool isProd) async {
     final jsonString =
         json.encode(taskList.map((task) => task.toJson()).toList());
+
+    // For Development
     String absolutePath = '/Users/adax/Github/SSRU_Flutter/db_app/$filePath';
+
+    // For Production
+    Directory tempDir = await getTemporaryDirectory();
+    String dirPath = tempDir.path;
+
+    if (isProd) {
+      absolutePath = '$dirPath/$filePath';
+    }
+
     final file = File(absolutePath);
     if (await file.exists()) {
       await file.writeAsString(jsonString);
+    } else {
+      print('File does not exist');
     }
   }
 }

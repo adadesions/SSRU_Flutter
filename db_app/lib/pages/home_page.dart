@@ -61,8 +61,8 @@ class _HomePageState extends State<HomePage> {
                       setState(() {
                         _futureTasks.then((taskList) {
                           taskList.add(Task(task: _task, dueDate: _dueDate));
-                          // TODO: Write new task to the file
-                          Task.writeFile(taskList, 'assets/storages/tasks.json');
+                          // Write new task to the file
+                          Task.writeFile(taskList, 'assets/storages/tasks.json', true);
                         });
                       });
                     },

@@ -1,8 +1,1 @@
-[
-  { "task": "Complete project", "dueDate": "2022-01-01" },
-  { "task": "Buy groceries", "dueDate": "2022-05-01" },
-  { "task": "Clean the house", "dueDate": "2022-05-15" },
-  { "task": "Exercise", "dueDate": "2022-06-02" },
-  { "task": "aaaaa", "dueDate": "sssss" },
-  { "task": "12134", "dueDate": "13214" }
-]
+[{"task":"Complete project","dueDate":"2022-01-01"},{"task":"Buy groceries","dueDate":"2022-05-01"},{"task":"Clean the house","dueDate":"2022-05-15"},{"task":"Exercise","dueDate":"2022-06-02"},{"task":"aaaaa","dueDate":"sssss"},{"task":"12134","dueDate":"13214"},{"task":"wwadasfasdf","dueDate":"afsadfsadf"},{"task":"adfasfadfasf","dueDate":"13124214"}]
