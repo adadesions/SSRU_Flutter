@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../models/task.dart';
+
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
@@ -19,6 +21,7 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     super.initState();
+    _futureTasks = Task.readFile('assets/storages/tasks.json');
   }
 
   @override
@@ -63,16 +66,17 @@ class _HomePageState extends State<HomePage> {
               child: FutureBuilder<List<Task>>(
                 future: _futureTasks,
                 builder: (context, snapshot) {
-                  return ListView.builder(
-                    itemCount: snapshot.data!.length,
-                    itemBuilder: (context, index) {
-                      return snapshot.hasData
-                          ? ListTile(
-                              title: snapshot.data![index].task,
-                            )
-                          : const CircularProgressIndicator();
-                    },
-                  );
+                  return snapshot.hasData
+                      ? ListView.builder(
+                          itemCount: snapshot.data!.length,
+                          itemBuilder: (context, index) {
+                            return ListTile(
+                              title: Text(snapshot.data![index].task),
+                              subtitle: Text(snapshot.data![index].dueDate),
+                            );
+                          },
+                        )
+                      : const CircularProgressIndicator();
                 },
               ),
             ),
