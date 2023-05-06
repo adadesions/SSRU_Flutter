@@ -57,6 +57,14 @@ class _HomePageState extends State<HomePage> {
                     child: const Text('Save'),
                     onPressed: () {
                       _formKeys.currentState!.save();
+                      // Update _futureTask state
+                      setState(() {
+                        _futureTasks.then((taskList) {
+                          taskList.add(Task(task: _task, dueDate: _dueDate));
+                          // TODO: Write new task to the file
+                          Task.writeFile(taskList, 'assets/storages/tasks.json');
+                        });
+                      });
                     },
                   ),
                 ],
