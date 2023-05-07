@@ -55,6 +55,9 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
+              ElevatedButton(
+                  onPressed: () => _uploadToStorage(MediaTypes.camera),
+                  child: const Icon(Icons.camera_alt_outlined)),
               Expanded(
                 child: FutureBuilder(
                   future: _loadImageFromStorage(),
