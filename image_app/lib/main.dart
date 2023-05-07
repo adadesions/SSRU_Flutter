@@ -51,9 +51,43 @@ class _MyHomePageState extends State<MyHomePage> {
         title: Text(widget.title),
       ),
       body: Padding(
-        padding: EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(16.0),
         child: Column(
-            mainAxisAlignment: MainAxisAlignment.center, children: <Widget>[]),
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Expanded(
+                child: FutureBuilder(
+                  future: _loadImageFromStorage(),
+                  builder: (context, snapshot) {
+                    return snapshot.connectionState == ConnectionState.done
+                        ? ListView.builder(
+                            itemCount: snapshot.data!.length,
+                            itemBuilder: (context, index) {
+                              final Map<String, dynamic> image =
+                                  snapshot.data![index];
+                              return ListTile(
+                                leading: Image.network(image['url']),
+                                title:
+                                    Text('Uploader: ${image['uploaded_by']}'),
+                                subtitle: Text(image['description']),
+                                trailing: TextButton(
+                                  child: const Icon(
+                                    Icons.remove_circle_outline,
+                                    color: Colors.red,
+                                  ),
+                                  onPressed: () {
+                                    _deleteImageOnStorage(image['path']);
+                                  },
+                                ),
+                              );
+                            })
+                        : const Center(
+                            child: CircularProgressIndicator(),
+                          );
+                  },
+                ),
+              ),
+            ]),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () => _uploadToStorage(MediaTypes.gallery),
@@ -113,5 +147,10 @@ class _MyHomePageState extends State<MyHomePage> {
     });
 
     return files;
+  }
+
+  Future<void> _deleteImageOnStorage(String ref) async {
+    await storage.ref(ref).delete();
+    setState(() {});
   }
 }
