@@ -4,6 +4,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:path/path.dart' as path;
 import 'package:image_picker/image_picker.dart';
+import 'package:path_provider/path_provider.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -91,5 +92,26 @@ class _MyHomePageState extends State<MyHomePage> {
     } catch (err) {
       print('Error at Picker Image: $err');
     }
+  }
+
+  Future<List<Map<String, dynamic>>> _loadImageFromStorage() async {
+    List<Map<String, dynamic>> files = [];
+
+    final ListResult result = await storage.ref().list();
+    final List<Reference> refs = result.items;
+
+    await Future.forEach<Reference>(refs, (ref) async {
+      final String url = await ref.getDownloadURL();
+      final FullMetadata meta = await ref.getMetadata();
+
+      files.add({
+        'url': url,
+        'path': ref.fullPath,
+        'uploaded_by': meta.customMetadata?['uploaded_by'] ?? 'Noname',
+        'description': meta.customMetadata?['description'] ?? '----',
+      });
+    });
+
+    return files;
   }
 }
