@@ -5,6 +5,7 @@ import '../models/task.dart';
 
 // Services
 import '../services/sqlite_service.dart';
+import '../services/firestore_service.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -27,6 +28,7 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     super.initState();
+    FireStoreService.getTasks();
     SqliteService.initializeDB().whenComplete(() async {
       _updatedTaskList();
     });
