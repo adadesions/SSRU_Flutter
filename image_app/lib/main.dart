@@ -74,7 +74,7 @@ class _MyHomePageState extends State<MyHomePage> {
           maxWidth: 1920);
 
       String fileName = path.basename(pickedImage!.path);
-      File imgFile = File(fileName);
+      File imgFile = File(pickedImage.path);
 
       try {
         await storage.ref(fileName).putFile(
